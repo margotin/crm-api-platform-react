@@ -100,10 +100,11 @@ class Customer
      * @Groups({"customers_read"})
      * @return float
      */
-    public function getTotalAmount(): float {
-        return array_reduce($this->invoices->toArray(), function($total, $invoice){
+    public function getTotalAmount(): float
+    {
+        return array_reduce($this->invoices->toArray(), function ($total, $invoice) {
             return $total + $invoice->getAmount();
-        },0);
+        }, 0);
     }
 
     /**
@@ -111,10 +112,11 @@ class Customer
      * @Groups({"customers_read"})
      * @return float
      */
-    public function getUnpaidAmount(): float {
-        return array_reduce($this->invoices->toArray(), function($total, $invoice){
+    public function getUnpaidAmount(): float
+    {
+        return array_reduce($this->invoices->toArray(), function ($total, $invoice) {
             return $total + ($invoice->getStatus() === 'SENT' ?  $invoice->getAmount() : 0);
-        },0);
+        }, 0);
     }
 
     public function getId(): ?int
