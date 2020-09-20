@@ -54,6 +54,7 @@ class User implements UserInterface
      * @Groups({"invoices_read","customers_read","invoices_subresource","users_read"})
      * @Assert\NotBlank(message="Le prénom du customer est obligatoire")
      * @Assert\Length(
+     *  allowEmptyString =true,
      *  min=3, minMessage="Le prénom doit faire entre 3 et 255 caractères",
      *  max=255, maxMessage="Le prénom doit faire entre 3 et 255 caractères"
      * )
@@ -65,6 +66,7 @@ class User implements UserInterface
      * @Groups({"invoices_read","customers_read","invoices_subresource","users_read"})
      * @Assert\NotBlank(message="Le nom du customer est obligatoire")
      * @Assert\Length(
+     *  allowEmptyString =true,
      *  min=3, minMessage="Le nom doit faire entre 3 et 255 caractères",
      *  max=255, maxMessage="Le nom doit faire entre 3 et 255 caractères"
      * )

@@ -1,16 +1,36 @@
 import axios from "axios";
 
 async function findAll() {
-  return await axios
-    .get("http://127.0.0.1:8000/api/customers")
-    .then((response) => response.data["hydra:member"]);
+  const response = await axios.get("http://127.0.0.1:8000/api/customers");
+  return response.data["hydra:member"];
 }
 
 function deleteCustomer(customerId) {
   return axios.delete("http://127.0.0.1:8000/api/customers/" + customerId);
 }
 
+async function findCustumer(customerId) {
+  const response = await axios.get(
+    "http://localhost:8000/api/customers/" + customerId
+  );
+  return response.data;
+}
+
+function updateCustomer(customerId, customer) {
+  return axios.put(
+    "http://localhost:8000/api/customers/" + customerId,
+    customer
+  );
+}
+
+function createCustomer(customer) {
+  return axios.post("http://localhost:8000/api/customers", customer);
+}
+
 export default {
   findAll,
   delete: deleteCustomer,
+  find: findCustumer,
+  update: updateCustomer,
+  create: createCustomer,
 };

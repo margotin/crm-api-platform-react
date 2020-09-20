@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
-import AuthAPI from "../services/authAPI";
+import React, { useContext, useState } from "react";
+import Field from "../components/forms/Field";
 import AuthContext from "../contexts/AuthContext";
+import AuthAPI from "../services/authAPI";
 
 export default function LoginPage({ history }) {
   const [credentials, setCredentials] = useState({
@@ -30,7 +31,6 @@ export default function LoginPage({ history }) {
       await AuthAPI.authenticate(credentials);
       setError("");
       setIsAuthenticated(true);
-      console.log(history);
       history.replace("/customers");
     } catch (error) {
       setError(
@@ -44,31 +44,24 @@ export default function LoginPage({ history }) {
       <h1>Connexion à l'application</h1>
 
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Adresse email</label>
-          <input
-            type="email"
-            placeholder="Adresse email de connexion"
-            name="username"
-            id="username"
-            className={"form-control" + (error ? " is-invalid" : "")}
-            value={credentials.username}
-            onChange={handleChange}
-          />
-          <p className="invalid-feedback">{error}</p>
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Mot de passe</label>
-          <input
-            type="password"
-            placeholder="Mot de passe de connexion"
-            name="password"
-            id="password"
-            className="form-control"
-            value={credentials.password}
-            onChange={handleChange}
-          />
-        </div>
+        <Field
+          name="username"
+          label="Adresse email"
+          value={credentials.username}
+          onChange={handleChange}
+          placeholder="Adresse email de connexion"
+          type="email"
+          error={error}
+        />
+
+        <Field
+          name="password"
+          label="Mot de passe"
+          value={credentials.password}
+          onChange={handleChange}
+          placeholder="Mot de passe de connexion"
+          type="password"
+        />
 
         <div className="form-group">
           <button type="submit" className="btn btn-success">

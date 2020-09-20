@@ -14,7 +14,7 @@ export default function Navbar({ history }) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <NavLink to="/" className="navbar-brand" href="#">
+      <NavLink to="/" className="navbar-brand">
         SymReact
       </NavLink>
       <button

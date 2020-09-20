@@ -1,5 +1,6 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Pagination from "../components/Pagination";
 import InvoicesAPI from "../services/invoicesAPI";
 
@@ -79,7 +80,12 @@ export default function InvoicesPage(props) {
 
   return (
     <>
-      <h1>Liste des factures</h1>
+      <div className="mb-3 d-flex justify-content-between align-items-center">
+        <h1>Liste des factures</h1>
+        <Link to="/invoices/new" className="btn btn-primary">
+          Créer une facture
+        </Link>
+      </div>
       <div className="form-group">
         <input
           type="text"
@@ -121,7 +127,12 @@ export default function InvoicesPage(props) {
                 {invoice.amount.toLocaleString()} €
               </td>
               <td>
-                <button className="btn-sm btn-primary mr-1">Editer</button>
+                <Link
+                  to={"/invoices/" + invoice.id}
+                  className="btn-sm btn-primary mr-1"
+                >
+                  Editer
+                </Link>
                 <button
                   className="btn-sm btn-danger"
                   onClick={() => handleDelete(invoice.id)}
