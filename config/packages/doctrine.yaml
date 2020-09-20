@@ -1,7 +1,7 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        serverVersion: 11
+        server_version: 12
         charset: utf8
 
         # IMPORTANT: You MUST configure your server version,
