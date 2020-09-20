@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import usersAPI from "../services/usersAPI";
 
@@ -36,6 +37,7 @@ export default function RegisterPage({ history }) {
     try {
       await usersAPI.register(user);
       setErrors({});
+      toast.success("Vous êtes désormais inscrit, vous pouvez vous connecter !");
       history.replace("/login");
     } catch ({ response }) {
       const { violations } = response.data;

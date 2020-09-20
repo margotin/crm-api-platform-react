@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import CustomersAPI from "../services/customersAPI";
 
@@ -19,6 +20,7 @@ export default function CustomerPage({ match, history }) {
       );
       setCustomer({ lastName, firstName, email, company });
     } catch (error) {
+      toast.error("Le client n'a pa pu être chargé");
       history.replace("/customers");
     }
   }
@@ -39,13 +41,16 @@ export default function CustomerPage({ match, history }) {
     event.preventDefault();
 
     try {
+      setErrors(template);
       if (editing) {
         await CustomersAPI.update(id, customer);
+        toast.success("Le client a bien été modifié !");
       } else {
         await CustomersAPI.create(customer);
+        toast.success("Le client a bien été créé !");        
         history.replace("/customers");
       }
-      setErrors(template);
+      
     } catch ({ response }) {
       const { violations } = response.data;
       if (violations) {

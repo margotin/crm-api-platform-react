@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import Select from "../components/forms/Select";
 import CustomersAPI from "../services/customersAPI";
@@ -22,6 +23,7 @@ export default function InvoicePage({ history, match }) {
         setInvoice({ ...invoice, customer: data[0].id });
       }
     } catch (error) {
+      toast.error("Impossible de charger les clients");
       history.replace("/invoices");
     }
   }
@@ -31,6 +33,7 @@ export default function InvoicePage({ history, match }) {
       const { amount, status, customer } = await InvoicesAPI.find(invoiceId);
       setInvoice({ amount, status, customer: customer.id });
     } catch (error) {
+      toast.error("Impossible de charger la facture demandée");
       history.replace("/invoices");
     }
   }
@@ -53,12 +56,13 @@ export default function InvoicePage({ history, match }) {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
+      setErrors(template);
       if (editing) {
         await InvoicesAPI.update(id, invoice);
-        setErrors(template);
+        toast.success("La facture a bien été modifiée !");
       } else {
         await InvoicesAPI.create(invoice);
-        setErrors(template);
+        toast.success("La facture a bien été créée !");
         history.replace("/invoices");
       }
     } catch ({ response }) {

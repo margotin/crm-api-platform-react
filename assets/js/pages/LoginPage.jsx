@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import Field from "../components/forms/Field";
 import AuthContext from "../contexts/AuthContext";
 import AuthAPI from "../services/authAPI";
@@ -31,6 +32,7 @@ export default function LoginPage({ history }) {
       await AuthAPI.authenticate(credentials);
       setError("");
       setIsAuthenticated(true);
+      toast.success("Authentification réussie !")
       history.replace("/customers");
     } catch (error) {
       setError(
