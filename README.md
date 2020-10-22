@@ -5,3 +5,6 @@ https://learn.web-develop.me/developpement-moderne-avec-apiplatform-symfony-et-r
 Techos utilisées :  
 Back : symfony + API Platform  
 Front: ReactJS  
+
+Pour tester l'application :   
+https://symreact.mathieumargotin.fr
